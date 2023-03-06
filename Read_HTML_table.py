@@ -32,7 +32,7 @@ class Adventure_time():
             print('Ошибка соединения, статус код =', status_code)
             result = False
         else:
-            print('Ошибка подключения к wiki =', status_code)
+            print('Ошибка подключения к сайту =', status_code)
             result = False
         return result
 
@@ -232,15 +232,16 @@ def open_json(config_name: str) -> dict:
             'number_table': data['number_table'],
         }
     except:
+        result = ''
         print(f'Файл {config_name} или поврежден или заполнен не правильно, пример:'
               '''
   {
   "login": "логин",
   "password": "пароль",
-  "url": "http://wiki.gt/bin/view/07.%20Развитие/Поставщики",
+  "url": "http://...",
   "pattern_name": "pattern.xlsx",
-  "save_name": "test_save.xlsx",
-  "number_table": 2
+  "save_name": "Savefile.xlsx",
+  "number_table": 1
   }
 ''')
     return result
@@ -256,9 +257,9 @@ def open_json_for_QT(config_name: str) -> dict:
         result = json.load(f)
 
     notifications = {
-        'login': 'Введите login Xwiki', 'password': 'Введите пароль Xwiki', 'url': 'Добавьте адрес Xwiki',
+        'login': 'Введите login Xwiki', 'password': 'Введите пароль', 'url': 'Добавьте ссылку',
         'pattern_name': 'Введите имя шаблона', 'save_name': 'Введите имя файла для сохранения',
-        'number_table': 'Введите номер таблицы в Xwiki'
+        'number_table': 'Введите номер таблицы на сайте'
     }
 
     for key, value in result.items():

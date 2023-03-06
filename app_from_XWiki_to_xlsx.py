@@ -222,12 +222,12 @@ class Ui_app_from_XWiki_to_xlsx(object):
 
     def retranslateUi(self, app_from_XWiki_to_xlsx):
         _translate = QtCore.QCoreApplication.translate
-        app_from_XWiki_to_xlsx.setWindowTitle(_translate("app_from_XWiki_to_xlsx", "Таблица из Xwiki"))
+        app_from_XWiki_to_xlsx.setWindowTitle(_translate("app_from_XWiki_to_xlsx", "Таблица из с сайта"))
         self.pushButton_save.setText(_translate("app_from_XWiki_to_xlsx", "Сохранить"))
         self.pushButton_start.setText(_translate("app_from_XWiki_to_xlsx", "Старт"))
         self.label_login.setText(_translate("app_from_XWiki_to_xlsx", "Логин"))
         self.label_password.setText(_translate("app_from_XWiki_to_xlsx", "Пароль"))
-        self.label_url.setText(_translate("app_from_XWiki_to_xlsx", "Ссылка на Xwiki"))
+        self.label_url.setText(_translate("app_from_XWiki_to_xlsx", "Ссылка"))
         self.label_pattern_name.setText(_translate("app_from_XWiki_to_xlsx", "Имя шаблона"))
         self.label_save_name.setText(_translate("app_from_XWiki_to_xlsx", "Имя файла для сохранения"))
         self.label_number_table.setText(_translate("app_from_XWiki_to_xlsx", "Номер таблицы"))
@@ -246,7 +246,6 @@ class App_from_XWiki_to_xlsx(QtWidgets.QMainWindow, Ui_app_from_XWiki_to_xlsx):
         self.pushButton_start.clicked.connect(self.start_main)
 
         self.first_data = Read_HTML_table.open_json_for_QT(config_name)
-
 
         self.lineEdit_login.setText(self.first_data['login'])
 
@@ -283,7 +282,6 @@ class App_from_XWiki_to_xlsx(QtWidgets.QMainWindow, Ui_app_from_XWiki_to_xlsx):
 
     @pyqtSlot()
     def start_main(self):
-
         data = {
             'login': self.lineEdit_login.text(),
             'url': self.lineEdit_url.text(),
@@ -296,7 +294,6 @@ class App_from_XWiki_to_xlsx(QtWidgets.QMainWindow, Ui_app_from_XWiki_to_xlsx):
             data['password'] = self.first_data['password']
         else:
             data['password'] = self.lineEdit_password.text()
-
 
         exemplar = Read_HTML_table.Adventure_time()
         status_code = exemplar.registration_and_load_HTML_for_QT(url=data['url'], login=data['login'], password=data['password'])
@@ -315,9 +312,7 @@ class App_from_XWiki_to_xlsx(QtWidgets.QMainWindow, Ui_app_from_XWiki_to_xlsx):
         # сохранение новых данных при старте
         if data != self.first_data:
             Read_HTML_table.save_json_for_QT(data, self.config_name)
-
         msg = QMessageBox.information(self, 'Внимание!', self.message_text)
-
 
 def main_event(config_name: str):
     app = QtWidgets.QApplication(sys.argv)
